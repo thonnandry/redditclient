@@ -7,18 +7,11 @@ import android.view.Menu;
 
 
 import com.thonysupersonic.redditclient.R;
-import com.thonysupersonic.redditclient.model.BeReddit;
-import com.thonysupersonic.redditclient.presenter.HomePresenter;
-import com.thonysupersonic.redditclient.presenter.HomePresenterImpl;
-import com.thonysupersonic.redditclient.view.interfaces.HomeView;
 
-import java.util.List;
+public class Home extends AppCompatActivity {
 
-public class Home extends AppCompatActivity  implements HomeView{
-
-    String title;
+    String title = "TOP";
     Toolbar toolbar;
-    HomePresenterImpl presenter;
 
 
     @Override
@@ -31,7 +24,7 @@ public class Home extends AppCompatActivity  implements HomeView{
 
         setTitle(title); //setting the title
 
-        presenter = new HomePresenterImpl(this); //instantiate my presenter object
+
 
     }
 
@@ -43,13 +36,5 @@ public class Home extends AppCompatActivity  implements HomeView{
         return super.onCreateOptionsMenu(menu); //in order to allow fragments set their own menus]
     }
 
-    @Override
-    public void onRedditListReady(List<BeReddit> redditList) {
 
-    }
-
-    @Override
-    public void onRedditListFail(String message) {
-
-    }
 }

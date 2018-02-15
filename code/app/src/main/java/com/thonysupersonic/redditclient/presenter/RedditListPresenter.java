@@ -4,7 +4,7 @@ package com.thonysupersonic.redditclient.presenter;
  * Created by anthony on 2/15/18.
  */
 
-public interface HomePresenter {
+public interface RedditListPresenter {
 
-    void getPaginnatedRedditList(int after, int limit);
+    void getPaginnatedRedditList(String after, int limit);
 }

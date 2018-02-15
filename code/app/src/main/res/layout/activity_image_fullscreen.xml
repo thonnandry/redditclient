@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.thonysupersonic.redditclient.view.activities.ImageFullscreen">
+
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/imgFullscreen"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorTextPrimary"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/no_image" />
+
+    <ProgressBar
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:id="@+id/loading"
+        android:layout_height="8dp"
+        android:indeterminate="true"
+        android:visibility="visible" />
+</android.support.constraint.ConstraintLayout>
