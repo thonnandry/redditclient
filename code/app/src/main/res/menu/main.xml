@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item android:id="@+id/actionDeleted"
+        android:icon="@drawable/ic_deleted"
+        app:showAsAction="always"
+        android:title="Deleted"></item>
+    <item android:id="@+id/actionFavorite"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_favorite"
+        android:title="Favorite" ></item>
+</menu>
