@@ -58,6 +58,7 @@ public class RedditAdapter extends ArrayAdapter<BeRedditRoot> {
 
         if(!getItem(position).data.thumbnail.contains("http")){
             Glide.with(getContext()).load(R.drawable.no_image).into(imgThumbnail);
+            imgThumbnail.setOnClickListener(null);
 
         }else {
             Glide.with(getContext()).load(getItem(position).data.thumbnail).into(imgThumbnail);
