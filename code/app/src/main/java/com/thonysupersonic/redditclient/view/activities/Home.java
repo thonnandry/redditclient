@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 
 
 import com.thonysupersonic.redditclient.R;
@@ -36,5 +37,8 @@ public class Home extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu); //in order to allow fragments set their own menus]
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 }

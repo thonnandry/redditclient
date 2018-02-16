@@ -2,6 +2,8 @@ package com.thonysupersonic.redditclient.view.fragments;
 
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -81,6 +83,8 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
         presenter.getPaginnatedRedditList(after, limit);
 
         swipeRefreshLayout.setRefreshing(true);
+
+        setHasOptionsMenu(true);
     }
 
 
@@ -239,5 +243,39 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
         }
 
         return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.actionFavorite){
+            showFavorites();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    public void showFavorites(){
+
+        //for the sake of simplicity i create everything dinamically
+
+        View v = getLayoutInflater().from(getContext()).inflate(R.layout.dialog_favorites, null);
+
+        ListView lstFavorites =  v.findViewById(R.id.lstFavorites);
+        RedditAdapter adapterFavorites = new RedditAdapter(getContext(), favoriteList, new ArrayList<String>());
+        lstFavorites.setAdapter(adapterFavorites);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Favorites");
+        builder.setView(v);
+        builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
+
     }
 }
