@@ -28,5 +28,6 @@ public class SplashScreen extends AppCompatActivity implements SplashView {
         //I redirect to the Home activity when the thread is finished
         Intent i = new Intent(this, Home.class);
         startActivity(i);
+        finish();
     }
 }
