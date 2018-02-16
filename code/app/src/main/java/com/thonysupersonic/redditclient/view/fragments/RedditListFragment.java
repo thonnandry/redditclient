@@ -10,12 +10,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.thonysupersonic.redditclient.R;
@@ -43,12 +47,10 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
 
 
     SwipeRefreshLayout swipeRefreshLayout;
-
     boolean isSplit = false;
-
     ArrayList<String> viewed;
-
-
+    ArrayList<String> dismissed;
+    ArrayList<BeRedditRoot> favoriteList;
 
 
     public static RedditListFragment createNewInstance(){
@@ -113,15 +115,20 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
             redditList = (ArrayList<BeRedditRoot>) savedInstanceState.getSerializable("redditList");
             viewed = (ArrayList<String>) savedInstanceState.getSerializable("viewed");
             after =  savedInstanceState.getString("after");
+            favoriteList = (ArrayList<BeRedditRoot>) savedInstanceState.getSerializable("favoriteList");
+            dismissed = (ArrayList<String>) savedInstanceState.getSerializable("dismissed");
         }else{
             redditList = new ArrayList<>();
             viewed = new ArrayList<>();
+            favoriteList = new ArrayList<>();
+            dismissed = new ArrayList<>();
         }
 
 
         adapter = new RedditAdapter(getActivity(), redditList, viewed);
         lstTopReddit.setAdapter(adapter);
         lstTopReddit.setOnItemClickListener(this);
+
         lstTopReddit.setOnScrollListener(new AbsListView.OnScrollListener() {
 
             @Override
@@ -142,6 +149,7 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
         });
 
 
+        registerForContextMenu(lstTopReddit);
 
         
     }
@@ -169,7 +177,12 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
             //if we have results
 
             //update the list
-            redditList.addAll(list);
+            for(BeRedditRoot rootObJECT : list) {
+                if(!dismissed.contains(rootObJECT.data.name)) // in order no ignored previously dismissed items
+                    redditList.add(rootObJECT);
+            }
+
+
             adapter.notifyDataSetChanged();
 
             //get the last items name in order to paginate from its position the next time
@@ -179,6 +192,9 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
         }
 
     }
+
+
+
 
     @Override
     public void onRedditListFail(String message) {
@@ -195,6 +211,33 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
         outState.putSerializable("viewed", viewed);
         outState.putSerializable("redditList", redditList);
         outState.putSerializable("after", after);
+        outState.putSerializable("dismissed", dismissed);
+        outState.putSerializable("favoriteList", favoriteList);
         super.onSaveInstanceState(outState);
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        getActivity().getMenuInflater().inflate(R.menu.main_context, menu);
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        //get the position
+        AdapterView.AdapterContextMenuInfo contextMenuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        if(item.getItemId() == R.id.actionDismiss){
+            dismissed.add(redditList.get(contextMenuInfo.position).data.name); //add the name of the dismissed item
+            redditList.remove(contextMenuInfo.position);
+            adapter.notifyDataSetChanged();
+        }else if (item.getItemId() == R.id.actionFavorite){
+            favoriteList.add(redditList.get(contextMenuInfo.position));
+            Toast.makeText(getContext(), "Item added to your favorites.", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onContextItemSelected(item);
     }
 }
