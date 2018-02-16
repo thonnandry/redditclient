@@ -46,6 +46,10 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
 
     boolean isSplit = false;
 
+    ArrayList<String> viewed = new ArrayList<>();
+
+
+
 
     public static RedditListFragment createNewInstance(){
         return new RedditListFragment();
@@ -95,12 +99,15 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
             startActivity(i);
 
         }
+
+        viewed.add(redditList.get(pos).data.name);
+        adapter.notifyDataSetChanged();
     }
 
 
     private void initListView(){
         redditList = new ArrayList<>();
-        adapter = new RedditAdapter(getActivity(), redditList);
+        adapter = new RedditAdapter(getActivity(), redditList, viewed);
         lstTopReddit.setAdapter(adapter);
         lstTopReddit.setOnItemClickListener(this);
         lstTopReddit.setOnScrollListener(new AbsListView.OnScrollListener() {
