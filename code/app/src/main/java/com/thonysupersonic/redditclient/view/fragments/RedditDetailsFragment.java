@@ -1,5 +1,6 @@
 package com.thonysupersonic.redditclient.view.fragments;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.thonysupersonic.redditclient.R;
 import com.thonysupersonic.redditclient.model.BeRedditObject;
+import com.thonysupersonic.redditclient.view.activities.ImageFullscreen;
 import com.thonysupersonic.redditclient.view.utilities.Functions;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -92,7 +94,17 @@ public class RedditDetailsFragment extends Fragment {
         imgThumbnail = v.findViewById(R.id.imgFullscreen);
 
 
-        if(object.url.contains("http")) {
+        imgThumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iFullscreen = new Intent(getContext(), ImageFullscreen.class);
+                iFullscreen.putExtra("urlImagen", object.url);
+                getContext().startActivity(iFullscreen);
+            }
+        });
+
+
+        if(object.url.contains("http") && !object.url.contains(".html")) {
 
             if (object.url.contains(".gifv")) {
                 object.url = object.url.replace(".gifv", ".gif");
@@ -101,8 +113,8 @@ public class RedditDetailsFragment extends Fragment {
             Glide.with(this).load(object.url).listener(new RequestListener<Drawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                    imgThumbnail.setImageResource(R.drawable.no_image);
                     loading.setVisibility(View.GONE);
+                    Glide.with(RedditDetailsFragment.this).load(R.drawable.no_image).into(imgThumbnail);
                     return false;
                 }
 
@@ -113,6 +125,7 @@ public class RedditDetailsFragment extends Fragment {
                 }
             }).into(imgThumbnail);
         }else{
+            loading.setVisibility(View.GONE);
             Glide.with(this).load(R.drawable.no_image).into(imgThumbnail);
         }
 

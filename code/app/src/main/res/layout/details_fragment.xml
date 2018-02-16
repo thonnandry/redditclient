@@ -19,8 +19,6 @@
             android:id="@+id/imgFullscreen"
             android:layout_width="243dp"
             android:layout_height="136dp"
-
-            android:background="@color/colorTextPrimary"
             android:scaleType="fitCenter"
             android:layout_centerHorizontal="true"
             app:srcCompat="@drawable/no_image" />
