@@ -36,7 +36,7 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
 
     ListView lstTopReddit;
     RedditAdapter adapter;
-    List<BeRedditRoot> redditList;
+    ArrayList<BeRedditRoot> redditList;
     RedditListPresenterImpl presenter;
     String after  = "";
     int limit = 25;
@@ -46,7 +46,7 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
 
     boolean isSplit = false;
 
-    ArrayList<String> viewed = new ArrayList<>();
+    ArrayList<String> viewed;
 
 
 
@@ -69,7 +69,8 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
         checkSplitMode();
 
         lstTopReddit = view.findViewById(R.id.lstTopReddit);
-        initListView();
+
+        initListView(savedInstanceState);
 
         swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
         initSwipe();
@@ -105,8 +106,19 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
     }
 
 
-    private void initListView(){
-        redditList = new ArrayList<>();
+    private void initListView(Bundle savedInstanceState){
+
+
+        if(savedInstanceState != null) {
+            redditList = (ArrayList<BeRedditRoot>) savedInstanceState.getSerializable("redditList");
+            viewed = (ArrayList<String>) savedInstanceState.getSerializable("viewed");
+            after =  savedInstanceState.getString("after");
+        }else{
+            redditList = new ArrayList<>();
+            viewed = new ArrayList<>();
+        }
+
+
         adapter = new RedditAdapter(getActivity(), redditList, viewed);
         lstTopReddit.setAdapter(adapter);
         lstTopReddit.setOnItemClickListener(this);
@@ -176,5 +188,13 @@ public class RedditListFragment extends Fragment implements RedditListView, Adap
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         showDetails(i);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable("viewed", viewed);
+        outState.putSerializable("redditList", redditList);
+        outState.putSerializable("after", after);
+        super.onSaveInstanceState(outState);
     }
 }

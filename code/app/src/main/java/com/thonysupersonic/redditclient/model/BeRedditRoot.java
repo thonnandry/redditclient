@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -19,13 +20,10 @@ import cz.msebera.android.httpclient.Header;
  */
 
 @JsonObject
-public class BeRedditRoot{
+public class BeRedditRoot implements Serializable{
     @JsonField
     public String kind;
     @JsonField
     public BeRedditObject data;
-
-
-
 
 }
