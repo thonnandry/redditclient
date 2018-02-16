@@ -45,6 +45,8 @@ public class ImageFullscreen extends AppCompatActivity {
         Glide.with(this).load(urlImagen).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                imgThumbnail.setImageResource(R.drawable.no_image);
+                loading.setVisibility(View.GONE);
                 return false;
             }
 

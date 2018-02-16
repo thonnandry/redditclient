@@ -50,12 +50,13 @@
 
             <ImageView
                 android:src="@drawable/ic_upvote"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_width="16dp"
+                android:layout_height="16dp" />
 
             <TextView
                 android:id="@+id/lblUpvote"
                 android:text=""
+                android:textSize="12sp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/colorUpvote"
                 android:layout_width="wrap_content"
@@ -63,18 +64,35 @@
 
 
             <ImageView
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="16dp"
                 android:src="@drawable/ic_downvote"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_width="16dp"
+                android:layout_height="16dp" />
 
             <TextView
                 android:id="@+id/lblDownvote"
                 android:text=""
+                android:textSize="12sp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/colorDownvote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/ic_comments" />
+
+            <TextView
+                android:id="@+id/lblComments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="12sp"
+                android:text=""
+                android:textColor="@color/colorDownvote" />
 
         </LinearLayout>
 

@@ -3,12 +3,14 @@ package com.thonysupersonic.redditclient.model;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import java.io.Serializable;
+
 /**
  * Created by anthony on 2/15/18.
  */
 
 @JsonObject
-public class BeRedditObject {
+public class BeRedditObject implements Serializable {
 
     @JsonField
     public String author;
@@ -34,6 +36,10 @@ public class BeRedditObject {
     public String name;
     @JsonField
     public int created_utc;
+    @JsonField
+    public int created;
+    @JsonField
+    public String permalink;
 
 
 }

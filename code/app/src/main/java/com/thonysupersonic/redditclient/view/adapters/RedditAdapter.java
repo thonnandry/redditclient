@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.thonysupersonic.redditclient.R;
 import com.thonysupersonic.redditclient.model.BeRedditRoot;
 import com.thonysupersonic.redditclient.view.activities.ImageFullscreen;
+import com.thonysupersonic.redditclient.view.utilities.Functions;
 
 import java.util.List;
 
@@ -45,14 +46,15 @@ public class RedditAdapter extends ArrayAdapter<BeRedditRoot> {
         TextView lblDownvote =  v.findViewById(R.id.lblDownvote);
         TextView lblTitle =  v.findViewById(R.id.lblTitle);
         TextView lblCreatedBy =  v.findViewById(R.id.lblCreatedBy);
+        TextView lblComments =  v.findViewById(R.id.lblComments);
         ImageView imgThumbnail =  v.findViewById(R.id.imgThumbnail);
 
 
         lblUpvote.setText(String.valueOf(getItem(position).data.ups));
         lblDownvote.setText(String.valueOf(getItem(position).data.downs));
         lblTitle.setText(getItem(position).data.title);
-        lblCreatedBy.setText(getItem(position).data.author);
-
+        lblCreatedBy.setText("By " + getItem(position).data.author + " - " + Functions.convertUTCTime(getItem(position).data.created));
+        lblComments.setText(String.valueOf(getItem(position).data.num_comments));
 
 
 
