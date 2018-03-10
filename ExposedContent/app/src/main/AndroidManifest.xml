@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.thonysupersonic.exposedcontent">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <provider
+            android:authorities="com.androidatc.exposedcontent.provider"
+            android:name=".DataProvider"
+            android:exported="true"
+            android:readPermission="com.androidatc.exposedcontent.READ_DATA"
+            ></provider>
+
+    </application>
+
+    <permission android:name="com.androidatc.exposedcontent.READ_DATA"
+        android:icon="@drawable/ic_permission"
+        android:description="@string/app_name"
+        android:label="Read Access"
+        android:protectionLevel="dangerous"
+        ></permission>
+
+</manifest>
