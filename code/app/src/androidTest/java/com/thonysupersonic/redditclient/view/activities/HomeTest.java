@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.microsoft.appcenter.espresso.Factory;
+import com.microsoft.appcenter.espresso.ReportHelper;
 import com.thonysupersonic.redditclient.R;
 
 import org.hamcrest.Description;
@@ -34,6 +36,10 @@ import static org.hamcrest.Matchers.is;
 @RunWith(AndroidJUnit4.class)
 public class HomeTest {
 
+
+    @Rule
+    public ReportHelper reportHelper = Factory.getReportHelper();
+
     @Rule
     public ActivityTestRule<Home> mActivityTestRule = new ActivityTestRule<>(Home.class);
 
@@ -41,7 +47,7 @@ public class HomeTest {
     public void splashScreenTest() throws InterruptedException {
 
 
-
+        reportHelper.label("Click en Favoritos");
         onView(withId(R.id.actionFavorite)).perform(click());
 
         Thread.sleep(3000);
