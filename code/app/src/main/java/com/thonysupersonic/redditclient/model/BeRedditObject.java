@@ -40,6 +40,8 @@ public class BeRedditObject implements Serializable {
     public int created;
     @JsonField
     public String permalink;
+	
+	//comentario de Oscar
 
 
 }
