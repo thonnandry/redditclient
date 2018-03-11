@@ -49,8 +49,9 @@ public class HomeTest {
 
         reportHelper.label("Click en Favoritos");
         onView(withId(R.id.actionFavorite)).perform(click());
-        reportHelper.label("Favoritos Abierto");
+
         Thread.sleep(3000);
+        reportHelper.label("Favoritos Abierto");
 
     }
 
