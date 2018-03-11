@@ -47,6 +47,7 @@ public class HomeTest {
     public void splashScreenTest() throws InterruptedException {
 
 
+        //this is for app center
         reportHelper.label("Click en Favoritos");
         onView(withId(R.id.actionFavorite)).perform(click());
 
