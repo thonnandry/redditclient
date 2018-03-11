@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 import com.thonysupersonic.redditclient.R;
 
 public class Home extends AppCompatActivity {
@@ -24,7 +27,8 @@ public class Home extends AppCompatActivity {
         setSupportActionBar(toolbar); //setting my toolbar as an actionbar
 
         setTitle(title); //setting the title
-
+        AppCenter.start(getApplication(), "16e2dbb1-ae79-45e0-a628-e0638f10602e",
+                Analytics.class, Crashes.class);
 
 
     }

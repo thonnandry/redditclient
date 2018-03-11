@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.thonysupersonic.redditclient"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -31,6 +31,10 @@ dependencies {
         exclude group: "com.android.support"
     }
 
+
+    def appCenterSdkVersion = '1.4.0'
+    compile "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
+    compile "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
 
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
